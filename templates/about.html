@@ -33,15 +33,17 @@
                     </p>
                 </div>
                 <div class="col-md-5">
-                    <img src="{{ member.image_source}}" alt="thoring" class="featurette-image image-responsive">
+                    <img src="{{ member.image_source}}" alt="" class="featurette-image image-responsive">
                 </div>
             
             {% else %}<!-- else statment-->
                 <div class="col-md-5">
-                    <img src="{{ member.image_source}}" alt="thoring" class="featurette-image image-responsive">
+                    <img src="{{ member.image_source}}" alt="" class="featurette-image image-responsive">
                 </div>
                 <div class="col-md-7"> 
-                    <h3>{{ loop.index }}. {{ member.name }}</h3><!-- This is the way to add index number in front od each name from loop -->
+                    <h3><a href="/about/{{ member.url }}">{{ loop.index }}. {{ member.name }}</a></h3><!-- This is the way to add index number in front od each name from loop -->
+                    <!--<h3><a href="/about/{{ member.name|replace(' ', '-')|replace('&', 'and')|replace('Ó', 'O')|lower }}">{{ loop.index }}. {{ member.name }}</a></h3>
+                     This will pull name and amend according to need for url usage -->
                     <p>
                         {{ member.description }}
                     </p>
