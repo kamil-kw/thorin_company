@@ -1,6 +1,6 @@
 import os
 import json
-from flask import Flask, render_template
+from flask import Flask, render_template, request, flash
 
 
 app = Flask(__name__)
@@ -43,16 +43,27 @@ def about_member(member_name):
                 If they do match, then we want our empty 'member'
                 '''
                 member = obj
-    return "<h1>" + member["name"] + "</h1>"
     '''
+    Instead of returning hard-coded HTML, I will "return render_template".
+    The first argument is going to be our new "member.html" template that we just created.
+    The second argument will be 'member=member'
+    This first 'member' is the variable name being passed through into our html file.
+    The second 'member' is the member object we created above on line 24.
+    '''
+    return render_template("member.html", member=member)
+    '''
+    return "<h1>" + member["name"] + "</h1>"
     Just to demonstrate that, we are going to return some HTML, the same as we did in one
     of our earlier videos.
     For now, I will just return "<h1>" + member["name"] + "</h1>".
     '''
 
 
-@app.route("/contact")
+@app.route("/contact", methods=["GET", "POST"])
 def contact():
+    if request.method == "POST":
+        print(request.form.get("name"))
+        print(request.form["email"])
     return render_template("contact.html", page_title="Contact") 
 
 
